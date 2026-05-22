@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English to French Neural Machine Translation: A Comparative Study of Deep Learning Architectures</title>
+  <meta name="description" content="A premium academic presentation exploring NMT architectures from LSTM Seq2Seq to Attention and Transformers.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Decorative Glowing Elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Main Presentation Container -->
+  <div class="presentation-container" id="presentation">
+    
+    <!-- Header Navigation & Controls -->
+    <header class="presentation-header">
+      <div class="project-tag">
+        <span class="pulse-dot"></span>
+        <span>NLP Research Mini-Project</span>
+      </div>
+      <div class="header-controls">
+        <button id="prev-btn" class="nav-icon-btn" title="Previous Slide (Left Arrow/Backspace)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="slide-indicator">
+          <span id="current-slide-num">1</span> <span class="indicator-separator">/</span> <span id="total-slides-num">17</span>
+        </div>
+        <button id="next-btn" class="nav-icon-btn" title="Next Slide (Right Arrow/Space)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <button id="menu-btn" class="nav-icon-btn" title="Toggle Slide Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+        <button id="fullscreen-btn" class="nav-icon-btn" title="Toggle Fullscreen">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Slides Wrapper -->
+    <main class="slides-wrapper" id="slides-wrapper">
+
+      <!-- SLIDE 1: TITLE SLIDE -->
+      <section class="slide active-slide" id="slide-1" data-slide-index="1">
+        <div class="slide-content title-slide-layout">
+          <div class="badge-row">
+            <span class="tech-badge">NLP</span>
+            <span class="tech-badge">Deep Learning</span>
+            <span class="tech-badge">Seq2Seq</span>
+            <span class="tech-badge">Transformers</span>
+          </div>
+          
+          <h1 class="main-title">English to French<br><span class="gradient-text">Neural Machine Translation</span></h1>
+          <p class="main-subtitle">A Comparative Study of Deep Learning Architectures</p>
+          
+          <div class="title-visual">
+            <div class="translation-visual-box">
+              <div class="lang-source">
+                <span class="lang-label">EN</span>
+                <span class="lang-text">"Recurrence is not necessary"</span>
+              </div>
+              <div class="visual-arrow-container">
+                <div class="visual-line"></div>
+                <div class="visual-arrow-head"></div>
+              </div>
+              <div class="lang-target">
+                <span class="lang-label">FR</span>
+                <span class="lang-text">"La récurrence n'est pas nécessaire"</span>
+              </div>
+            </div>
+          </div>
+          
+          <footer class="title-footer">
+            <div class="team-section">
+              <span class="section-label">Research Team:</span>
+              <div class="team-grid">
+                <div class="team-member">Achouri Islem Youcef</div>
+                <div class="team-member">Mohammed Ousaid Ahlem</div>
+                <div class="team-member">Merzouk Nabahat</div>
+                <div class="team-member">Yettou Abdellah</div>
+              </div>
+            </div>
+            <div class="academic-year">
+              <span class="year-label">Academic Year</span>
+              <span class="year-val">2025–2026</span>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: PROJECT OVERVIEW -->
+      <section class="slide" id="slide-2" data-slide-index="2">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">02.</span> Project Overview</h2>
+          
+          <div class="grid-2-cols">
+            <div class="card glass-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <h3>Objective &amp; Goal</h3>
+              <p>The primary goal is to build, evaluate, and compare multiple <strong>Neural Machine Translation (NMT)</strong> architectures to translate English sentences into French.</p>
+              <p>This project implements the entire end-to-end NLP pipeline from scratch in PyTorch, exploring structural evolutions in representation learning.</p>
+            </div>
+            
+            <div class="card glass-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" x2="12" y1="2" y2="12"/></svg>
+              </div>
+              <h3>Historical Evolution Motivation</h3>
+              <p>Understanding the paradigm shift in sequence modeling:</p>
+              <ul class="accent-bullets">
+                <li>From <strong>LSTM sequence-to-sequence</strong> architectures that compress context into a fixed vector.</li>
+                <li>To <strong>Attention Mechanisms</strong> that dynamically distribute focus.</li>
+                <li>To <strong>Pure Transformer architectures</strong> which completely bypass recurrence in favor of parallelized self-attention.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pipeline-flow-wrapper">
+            <h3>End-to-End NMT Pipeline Implementation</h3>
+            <div class="pipeline-steps-grid">
+              <div class="step-box">
+                <span class="step-num">01</span>
+                <span class="step-name">Preprocessing</span>
+              </div>
+              <div class="step-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="step-box">
+                <span class="step-num">02</span>
+                <span class="step-name">Tokenization</span>
+              </div>
+              <div class="step-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="step-box">
+                <span class="step-num">03</span>
+                <span class="step-name">Model Design</span>
+              </div>
+              <div class="step-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="step-box">
+                <span class="step-num">04</span>
+                <span class="step-name">Training</span>
+              </div>
+              <div class="step-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="step-box">
+                <span class="step-num">05</span>
+                <span class="step-name">Inference</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: DATASET -->
+      <section class="slide" id="slide-3" data-slide-index="3">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">03.</span> Dataset: Tatoeba Parallel Corpus</h2>
+          
+          <div class="grid-3-cols">
+            <div class="stat-card glass-card">
+              <div class="stat-num gradient-text">239,188</div>
+              <div class="stat-label">Bilingual Sentence Pairs</div>
+              <p class="stat-desc">English-French parallel mappings capturing rich syntactic variety</p>
+            </div>
+            <div class="stat-card glass-card">
+              <div class="stat-num gradient-text">40-50</div>
+              <div class="stat-label">Max Word Length</div>
+              <p class="stat-desc">Includes conversational dialogues, idioms, and complex sentence structures</p>
+            </div>
+            <div class="stat-card glass-card">
+              <div class="stat-num gradient-text">Parallel</div>
+              <div class="stat-label">Corpus Structure</div>
+              <p class="stat-desc">Aligned sentence-by-sentence to enable precise translation mapping</p>
+            </div>
+          </div>
+
+          <div class="data-preview-box card glass-card">
+            <h3>Bilingual Corpus Examples</h3>
+            <div class="table-container">
+              <table class="data-preview-table">
+                <thead>
+                  <tr>
+                    <th>English Source (Input)</th>
+                    <th>French Translation (Target)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="tag-en">EN</span> She is reading a book.</td>
+                    <td><span class="tag-fr">FR</span> Elle lit un livre.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="tag-en">EN</span> They have decided to cancel the meeting.</td>
+                    <td><span class="tag-fr">FR</span> Ils ont décidé d'annuler la réunion.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="tag-en">EN</span> The artificial intelligence models learn fast.</td>
+                    <td><span class="tag-fr">FR</span> Les modèles d'intelligence artificielle apprennent vite.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: PREPROCESSING PIPELINE -->
+      <section class="slide" id="slide-4" data-slide-index="4">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">04.</span> Preprocessing Pipeline</h2>
+          <p class="slide-description">Raw text cannot be processed directly by neural networks. We implement a custom pipeline to normalize strings.</p>
+          
+          <div class="interactive-pipeline-container">
+            <div class="pipeline-steps-vertical">
+              <div class="pipeline-step-item active" data-step="1">
+                <div class="step-indicator-dot">1</div>
+                <div class="step-text">
+                  <h4>Lowercasing</h4>
+                  <p>Ensures consistency and reduces vocabulary redundancy (e.g., "Hello" and "hello" map to the same token).</p>
+                </div>
+              </div>
+              <div class="pipeline-step-item" data-step="2">
+                <div class="step-indicator-dot">2</div>
+                <div class="step-text">
+                  <h4>HTML Tag Stripping</h4>
+                  <p>Removes any formatting or markup present in raw source datasets.</p>
+                </div>
+              </div>
+              <div class="pipeline-step-item" data-step="3">
+                <div class="step-indicator-dot">3</div>
+                <div class="step-text">
+                  <h4>Punctuation Tokenization</h4>
+                  <p>Separates punctuation marks from root words to treat them as independent features.</p>
+                </div>
+              </div>
+              <div class="pipeline-step-item" data-step="4">
+                <div class="step-indicator-dot">4</div>
+                <div class="step-text">
+                  <h4>Whitespace Normalization</h4>
+                  <p>Strips redundant spaces and replaces specific symbols with standard tokens.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="pipeline-preview-card glass-card">
+              <h3>Live Pipeline Transformation</h3>
+              <div class="input-output-comparison">
+                <div class="comp-box">
+                  <span class="comp-title">Raw Sentence Input</span>
+                  <div class="comp-value raw-value">"Hello, <b>World</b>!"</div>
+                </div>
+                <div class="comp-arrow">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7B61FF" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                </div>
+                <div class="comp-box highlight-glow">
+                  <span class="comp-title">Processed Pipeline State</span>
+                  <div class="comp-value processed-value" id="pipeline-state-output">"hello , world !"</div>
+                </div>
+              </div>
+              <div class="pipeline-controls">
+                <button id="prev-prep-step" class="action-btn secondary-btn" disabled>Back</button>
+                <button id="next-prep-step" class="action-btn primary-btn">Next Step</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: TOKENIZATION STRATEGY -->
+      <section class="slide" id="slide-5" data-slide-index="5">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">05.</span> Tokenization Strategy Comparison</h2>
+          
+          <div class="grid-2-cols">
+            <div class="card glass-card border-glow-blue">
+              <div class="card-badge bg-blue">Baseline</div>
+              <h3>Word-Level Tokenization</h3>
+              <p class="negative-text"><strong>Core Drawbacks:</strong></p>
+              <ul class="cross-bullets">
+                <li><strong>Exploding Vocabulary:</strong> Grows to ~49,000 unique words.</li>
+                <li><strong>Out-of-Vocabulary (OOV):</strong> Struggles with unseen inflections.</li>
+                <li><strong>UNK Bottleneck:</strong> Forces unknown words to map to a generic <code>&lt;UNK&gt;</code> token, destroying semantic accuracy.</li>
+              </ul>
+              
+              <div class="token-example-box">
+                <span class="token-example-label">Output with unseen "unbelievable":</span>
+                <div class="token-list">
+                  <span class="token-item unk-token">&lt;UNK&gt;</span>
+                  <span class="token-item">results</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card glass-card border-glow-purple">
+              <div class="card-badge bg-purple">Implemented Best Practice</div>
+              <h3>Byte Pair Encoding (BPE)</h3>
+              <p class="positive-text"><strong>Core Advantages:</strong></p>
+              <ul class="check-bullets">
+                <li><strong>Subword Vocabulary:</strong> Restricts vocabulary size to 16,000 subwords.</li>
+                <li><strong>Zero OOV Issues:</strong> Breaks unseen words into character sequences.</li>
+                <li><strong>Parameter Efficiency:</strong> Saves model parameters while improving accuracy and semantic density.</li>
+              </ul>
+              
+              <div class="token-example-box">
+                <span class="token-example-label">BPE split of "unbelievable":</span>
+                <div class="token-list">
+                  <span class="token-item">un@@</span>
+                  <span class="token-item">believ@@</span>
+                  <span class="token-item">able</span>
+                  <span class="token-item">results</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-comparison-bar card glass-card">
+            <h3>Vocabulary Size &amp; Out-of-Vocabulary (OOV) Rate</h3>
+            <div class="bar-chart-wrapper">
+              <div class="bar-chart-row">
+                <span class="bar-label">Word-Level Vocab</span>
+                <div class="bar-track"><div class="bar-fill fill-blue" style="width: 100%;">49K</div></div>
+              </div>
+              <div class="bar-chart-row">
+                <span class="bar-label">BPE Subword Vocab</span>
+                <div class="bar-track"><div class="bar-fill fill-purple" style="width: 32%;">16K (67% Reduction)</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: ARCHITECTURE OVERVIEW -->
+      <section class="slide" id="slide-6" data-slide-index="6">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">06.</span> Architecture Comparison Roadmap</h2>
+          <p class="slide-description">We built and evaluated 4 distinct models to trace the evolutionary timeline of NMT architectures.</p>
+          
+          <div class="timeline-container">
+            <div class="timeline-track"></div>
+            
+            <div class="timeline-node" data-index="1">
+              <div class="node-marker">1</div>
+              <div class="node-card glass-card">
+                <div class="model-meta">No Attention</div>
+                <h4>LSTM Seq2Seq</h4>
+                <p>Translates sequences using a fixed context vector bottleneck.</p>
+                <span class="node-tag">Recurrent</span>
+              </div>
+            </div>
+
+            <div class="timeline-node" data-index="2">
+              <div class="node-marker">2</div>
+              <div class="node-card glass-card">
+                <div class="model-meta">Additive Attention</div>
+                <h4>LSTM + Bahdanau</h4>
+                <p>Introduces a dynamic alignment mechanism to query encoder hidden states.</p>
+                <span class="node-tag">Recurrent + Attention</span>
+              </div>
+            </div>
+
+            <div class="timeline-node" data-index="3">
+              <div class="node-marker">3</div>
+              <div class="node-card glass-card">
+                <div class="model-meta">Generative / Language Model</div>
+                <h4>Decoder-Only Transformer</h4>
+                <p>Performs translation as autoregressive language modeling with causal masks.</p>
+                <span class="node-tag">Causal Self-Attention</span>
+              </div>
+            </div>
+
+            <div class="timeline-node" data-index="4">
+              <div class="node-marker">4</div>
+              <div class="node-card glass-card highlight-node">
+                <div class="model-meta">State-of-the-Art</div>
+                <h4>Encoder-Decoder Transformer</h4>
+                <p>The standard seq2seq transformer with cross-attention and parallel execution.</p>
+                <span class="node-tag tag-sota">Optimal Architecture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: LSTM SEQ2SEQ (NO ATTENTION) -->
+      <section class="slide" id="slide-7" data-slide-index="7">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">07.</span> Architecture 1: Encoder-Decoder LSTM (No Attention)</h2>
+          
+          <div class="grid-2-cols-wide">
+            <div class="architecture-details">
+              <div class="spec-list">
+                <div class="spec-item">
+                  <div class="spec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                  <div>
+                    <h4>Bidirectional Encoder</h4>
+                    <p>Reads English sentences in both forward and backward directions to capture dual-directional context.</p>
+                  </div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div>
+                  <div>
+                    <h4>Unidirectional Decoder</h4>
+                    <p>Generates the target French sentence autoregressively, step-by-step.</p>
+                  </div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+                  <div>
+                    <h4>Fixed-Size Context Vector</h4>
+                    <p>The encoder's final hidden state acts as the sole, rigid summary vector representing the entire sentence.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="alert-box warning-alert">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12" y1="17" y2="17"/></svg>
+                <span><strong>The Bottleneck:</strong> Strains significantly on long sequences because it forces variable-length inputs into a fixed vector space.</span>
+              </div>
+            </div>
+            
+            <div class="architecture-diagram-container card glass-card">
+              <h3>Seq2Seq Architecture Diagram</h3>
+              <div class="diagram-box">
+                <svg width="100%" height="240" viewBox="0 0 400 240" class="svg-diagram">
+                  <!-- Encoder Nodes -->
+                  <g class="enc-nodes">
+                    <rect x="20" y="160" width="45" height="35" rx="5" fill="#121826" stroke="#3B82F6" stroke-width="1.5" />
+                    <text x="42.5" y="182.5" fill="#fff" font-size="10" text-anchor="middle">Enc 1</text>
+                    <rect x="85" y="160" width="45" height="35" rx="5" fill="#121826" stroke="#3B82F6" stroke-width="1.5" />
+                    <text x="107.5" y="182.5" fill="#fff" font-size="10" text-anchor="middle">Enc 2</text>
+                    <rect x="150" y="160" width="45" height="35" rx="5" fill="#121826" stroke="#3B82F6" stroke-width="1.5" />
+                    <text x="172.5" y="182.5" fill="#fff" font-size="10" text-anchor="middle">Enc 3</text>
+                  </g>
+                  <!-- Arrows between Encoder -->
+                  <path d="M 65 177.5 L 85 177.5" stroke="#3B82F6" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+                  <path d="M 130 177.5 L 150 177.5" stroke="#3B82F6" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+                  
+                  <!-- Inputs -->
+                  <text x="42.5" y="220" fill="#9CA3AF" font-size="10" text-anchor="middle">"The"</text>
+                  <text x="107.5" y="220" fill="#9CA3AF" font-size="10" text-anchor="middle">"cat"</text>
+                  <text x="172.5" y="220" fill="#9CA3AF" font-size="10" text-anchor="middle">"sat"</text>
+
+                  <!-- Context Vector (Bottleneck) -->
+                  <rect x="220" y="100" width="60" height="30" rx="15" fill="#7B61FF" stroke="#A855F7" stroke-width="2" class="glow-path"/>
+                  <text x="250" y="118" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">Context Vector</text>
+
+                  <!-- Encoder to Context Vector -->
+                  <path d="M 172.5 160 L 172.5 115 L 220 115" stroke="#3B82F6" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+                  <!-- Decoder Nodes -->
+                  <g class="dec-nodes">
+                    <rect x="315" y="100" width="45" height="35" rx="5" fill="#121826" stroke="#A855F7" stroke-width="1.5" />
+                    <text x="337.5" y="122.5" fill="#fff" font-size="10" text-anchor="middle">Dec 1</text>
+                    <rect x="315" y="40" width="45" height="35" rx="5" fill="#121826" stroke="#A855F7" stroke-width="1.5" />
+                    <text x="337.5" y="62.5" fill="#fff" font-size="10" text-anchor="middle">Dec 2</text>
+                  </g>
+                  
+                  <!-- Connections -->
+                  <path d="M 280 115 L 315 115" stroke="#A855F7" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+                  <path d="M 337.5 100 L 337.5 75" stroke="#A855F7" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+                  
+                  <!-- Outputs -->
+                  <text x="375" y="122.5" fill="#E5E7EB" font-size="9">"Le"</text>
+                  <text x="375" y="62.5" fill="#E5E7EB" font-size="9">"chat"</text>
+
+                  <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3B82F6" />
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: TEACHER FORCING & TRAINING -->
+      <section class="slide" id="slide-8" data-slide-index="8">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">08.</span> Training: Teacher Forcing Decay</h2>
+          
+          <div class="grid-2-cols">
+            <div class="card glass-card">
+              <h3>Teacher Forcing Strategy</h3>
+              <p>During recurrent model training, we feed the actual target token from the training set instead of the model's generated token as input to the next step.</p>
+              <ul class="accent-bullets">
+                <li><strong>Exposure Bias:</strong> Strictly relying on teacher forcing leads to test-time instability.</li>
+                <li><strong>Decay Schedule:</strong> We progressively decay the teacher forcing ratio from 100% to 30% over the training cycle to increase model robustness.</li>
+                <li><strong>Recovery:</strong> Temporary loss spikes occur when decay is triggered, but the loss recovers quickly, demonstrating increased generalization.</li>
+              </ul>
+            </div>
+
+            <div class="card glass-card">
+              <h3>Ratio Decay Schedule</h3>
+              <div class="table-container">
+                <table class="decay-table">
+                  <thead>
+                    <tr>
+                      <th>Training Epochs</th>
+                      <th>Teacher Forcing Ratio</th>
+                      <th>Supervision Style</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="highlight-row-1">
+                      <td>Epochs 0–2</td>
+                      <td class="bold-text">1.0</td>
+                      <td>Guided (Fast Initial Convergence)</td>
+                    </tr>
+                    <tr class="highlight-row-2">
+                      <td>Epochs 3–5</td>
+                      <td class="bold-text">0.9</td>
+                      <td>Transitioning Mode</td>
+                    </tr>
+                    <tr class="highlight-row-3">
+                      <td>Epochs 6–9</td>
+                      <td class="bold-text">0.7</td>
+                      <td>Semi-Guided Mode</td>
+                    </tr>
+                    <tr class="highlight-row-4">
+                      <td>Epochs 10–14</td>
+                      <td class="bold-text">0.5</td>
+                      <td>Balanced Training</td>
+                    </tr>
+                    <tr class="highlight-row-5">
+                      <td>Epochs 15–17</td>
+                      <td class="bold-text">0.3</td>
+                      <td>Autonomous Mode (Robust)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="training-stats-row grid-3-cols">
+            <div class="mini-stat card glass-card">
+              <h4>Gradient Clipping</h4>
+              <p>Clips gradients at <strong>1.0</strong> to avoid exploding gradients in recurrent weights.</p>
+            </div>
+            <div class="mini-stat card glass-card">
+              <h4>Mixed Precision (AMP)</h4>
+              <p>Automatic Mixed Precision training reduces memory footprint and boosts throughput.</p>
+            </div>
+            <div class="mini-stat card glass-card">
+              <h4>Optimizer</h4>
+              <p><strong>AdamW</strong> optimizer with Cosine Annealing learning rate schedule.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: BAHDANAU ATTENTION -->
+      <section class="slide" id="slide-9" data-slide-index="9">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">09.</span> Architecture 2: LSTM + Bahdanau Attention</h2>
+          
+          <div class="grid-2-cols-wide">
+            <div class="architecture-details">
+              <h3>Dynamic Attention Alignment</h3>
+              <p>Instead of compressing the input sequence to a single context vector, the decoder queries all encoder states at each time step.</p>
+              <ul class="accent-bullets">
+                <li><strong>Alignment Scores:</strong> Calculated using an additive scoring function:
+                  <div class="formula-box">
+                    <code>score(s<sub>i-1</sub>, h<sub>j</sub>) = v<sub>a</sub><sup>T</sup> tanh(W<sub>a</sub> s<sub>i-1</sub> + U<sub>a</sub> h<sub>j</sub>)</code>
+                  </div>
+                </li>
+                <li><strong>Attention Weights:</strong> Softmax over the alignment scores yields a probability distribution representing relevance.</li>
+                <li><strong>Dynamic Context Vector:</strong> Calculated as a weighted sum of all encoder states.</li>
+              </ul>
+              
+              <div class="alert-box success-alert">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span><strong>Advantage:</strong> Eliminates the fixed-vector bottleneck, allowing the model to resolve alignment and translate medium sequences.</span>
+              </div>
+            </div>
+
+            <!-- Heatmap Visualization Card -->
+            <div class="card glass-card attention-heatmap-card">
+              <h3>Interactive Attention Weight Heatmap</h3>
+              <p class="small-desc">Hover over a grid cell to see the alignment strength between English source and French target tokens.</p>
+              
+              <div class="heatmap-matrix-container">
+                <!-- Heatmap grid generated via javascript for flexibility -->
+                <div id="heatmap-grid"></div>
+              </div>
+              <div id="heatmap-tooltip" class="heatmap-tooltip">Hover over cells to see alignment scores</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: DECODER-ONLY TRANSFORMER -->
+      <section class="slide" id="slide-10" data-slide-index="10">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">10.</span> Architecture 3: Decoder-Only Transformer</h2>
+          
+          <div class="grid-2-cols">
+            <div class="card glass-card">
+              <h3>Translation as Language Modeling</h3>
+              <p>Translates sequences in an autoregressive, decoder-only manner by framing translation as sequence continuation.</p>
+              <ul class="accent-bullets">
+                <li><strong>Causal Self-Attention:</strong> Restricts tokens from attending to future tokens (upper-triangular masking).</li>
+                <li><strong>Positional Embeddings:</strong> Learns/computes positional data to preserve order since recurrence is absent.</li>
+                <li><strong>Fully Parallelized Training:</strong> Tokens are processed simultaneously, bypassing the sequential step-by-step nature of LSTMs.</li>
+              </ul>
+            </div>
+
+            <div class="card glass-card">
+              <h3>Mathematical Formulation</h3>
+              <div class="math-card">
+                <h4>Scale Dot-Product Self-Attention</h4>
+                <div class="formula-block">
+                  <code>Attention(Q, K, V) = softmax( (Q K<sup>T</sup>) / &radic;d<sub>k</sub> ) V</code>
+                </div>
+                <p class="math-legend">
+                  Where:
+                  <br>• <strong>Q</strong> = Query Matrix
+                  <br>• <strong>K</strong> = Key Matrix
+                  <br>• <strong>V</strong> = Value Matrix
+                  <br>• <strong>d<sub>k</sub></strong> = Scaling Dimension
+                </p>
+              </div>
+              
+              <div class="math-card" style="margin-top: 15px;">
+                <h4>Causal Attention Masking (Lower Triangular)</h4>
+                <div class="mask-matrix-visual">
+                  <div class="mask-row"><span class="mask-cell active-cell">1</span><span class="mask-cell">0</span><span class="mask-cell">0</span><span class="mask-cell">0</span></div>
+                  <div class="mask-row"><span class="mask-cell active-cell">1</span><span class="mask-cell active-cell">1</span><span class="mask-cell">0</span><span class="mask-cell">0</span></div>
+                  <div class="mask-row"><span class="mask-cell active-cell">1</span><span class="mask-cell active-cell">1</span><span class="mask-cell active-cell">1</span><span class="mask-cell">0</span></div>
+                  <div class="mask-row"><span class="mask-cell active-cell">1</span><span class="mask-cell active-cell">1</span><span class="mask-cell active-cell">1</span><span class="mask-cell active-cell">1</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: ENCODER-DECODER TRANSFORMER -->
+      <section class="slide" id="slide-11" data-slide-index="11">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">11.</span> Architecture 4: Encoder-Decoder Transformer</h2>
+          
+          <div class="grid-2-cols-wide">
+            <div class="architecture-details">
+              <div class="card-badge bg-purple" style="display:inline-block; margin-bottom:10px;">Best Architecture (SOTA)</div>
+              <h3>Full Seq2Seq Transformer Structure</h3>
+              <p>The standard Transformer architecture split into a bidirectional representation encoder and an autoregressive decoder.</p>
+              <ul class="accent-bullets">
+                <li><strong>Encoder Stack:</strong> Computes multi-head self-attention over the English source sequence in parallel.</li>
+                <li><strong>Decoder Stack:</strong> Computes masked self-attention over generated French tokens, then performs cross-attention over encoder states.</li>
+                <li><strong>Cross-Attention Alignment:</strong> Resolves semantic relationships between English queries and French keys/values.</li>
+              </ul>
+              
+              <div class="metric-card glass-card" style="margin-top: 20px;">
+                <h4>Why it outperforms other architectures:</h4>
+                <p>Fully captures bidirectional context in the source language while keeping decoder generation causally clean. Parallel GPU training enables scaling to massive datasets with optimal gradient flow.</p>
+              </div>
+            </div>
+            
+            <div class="architecture-diagram-container card glass-card">
+              <h3>Transformer Block Diagram</h3>
+              <div class="diagram-box">
+                <svg width="100%" height="280" viewBox="0 0 300 280" class="svg-diagram">
+                  <!-- Encoder Block -->
+                  <rect x="20" y="50" width="100" height="180" rx="8" fill="#121826" stroke="#3B82F6" stroke-width="2" />
+                  <text x="70" y="40" fill="#3B82F6" font-size="12" font-weight="bold" text-anchor="middle">ENCODER</text>
+                  
+                  <rect x="30" y="70" width="80" height="35" rx="4" fill="#1A2235" stroke="#3B82F6" stroke-width="1" />
+                  <text x="70" y="92" fill="#fff" font-size="8" text-anchor="middle">Multi-Head Attn</text>
+                  
+                  <rect x="30" y="125" width="80" height="35" rx="4" fill="#1A2235" stroke="#3B82F6" stroke-width="1" />
+                  <text x="70" y="147" fill="#fff" font-size="8" text-anchor="middle">Feed Forward</text>
+
+                  <rect x="30" y="180" width="80" height="35" rx="4" fill="#1A2235" stroke="#3B82F6" stroke-width="1" />
+                  <text x="70" y="202" fill="#fff" font-size="8" text-anchor="middle">Add &amp; Norm</text>
+
+                  <!-- Decoder Block -->
+                  <rect x="180" y="50" width="100" height="180" rx="8" fill="#121826" stroke="#A855F7" stroke-width="2" />
+                  <text x="230" y="40" fill="#A855F7" font-size="12" font-weight="bold" text-anchor="middle">DECODER</text>
+
+                  <rect x="190" y="70" width="80" height="30" rx="4" fill="#1A2235" stroke="#A855F7" stroke-width="1" />
+                  <text x="230" y="88" fill="#fff" font-size="7" text-anchor="middle">Masked Self-Attn</text>
+
+                  <rect x="190" y="115" width="80" height="30" rx="4" fill="#1A2235" stroke="#7B61FF" stroke-width="1.5" class="glow-path" />
+                  <text x="230" y="133" fill="#fff" font-size="7" text-anchor="middle">Cross-Attention</text>
+
+                  <rect x="190" y="155" width="80" height="30" rx="4" fill="#1A2235" stroke="#A855F7" stroke-width="1" />
+                  <text x="230" y="173" fill="#fff" font-size="7" text-anchor="middle">Feed Forward</text>
+
+                  <rect x="190" y="195" width="80" height="25" rx="4" fill="#1A2235" stroke="#A855F7" stroke-width="1" />
+                  <text x="230" y="211" fill="#fff" font-size="7" text-anchor="middle">Add &amp; Norm</text>
+
+                  <!-- Cross-Attention Vector Line -->
+                  <path d="M 120 140 L 190 130" stroke="#7B61FF" stroke-width="2" stroke-dasharray="4,3" fill="none" marker-end="url(#cross-arrow)">
+                    <animate attributeName="stroke-dashoffset" values="0;20" dur="2s" repeatCount="indefinite" />
+                  </path>
+
+                  <!-- Input & Output Labels -->
+                  <text x="70" y="250" fill="#9CA3AF" font-size="9" text-anchor="middle">Source Tokens (EN)</text>
+                  <text x="230" y="250" fill="#9CA3AF" font-size="9" text-anchor="middle">Target Tokens (FR)</text>
+
+                  <defs>
+                    <marker id="cross-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7B61FF" />
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: COMPARATIVE ANALYSIS -->
+      <section class="slide" id="slide-12" data-slide-index="12">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">12.</span> Architecture Comparative Analysis</h2>
+          
+          <div class="table-container large-table-container card glass-card">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Architecture Feature</th>
+                  <th>LSTM (No Attention)</th>
+                  <th>LSTM + Bahdanau</th>
+                  <th>Decoder-Only Transformer</th>
+                  <th class="highlight-col-header">Enc-Dec Transformer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="feature-name">Attention Type</td>
+                  <td>None</td>
+                  <td>Additive Attention</td>
+                  <td>Causal Self-Attention</td>
+                  <td class="highlight-col-cell">Self &amp; Cross Attention</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Long Sequence Handling</td>
+                  <td class="negative-text">Poor (Bottleneck)</td>
+                  <td class="warning-text">Moderate (Flat weights)</td>
+                  <td class="positive-text">Excellent</td>
+                  <td class="highlight-col-cell positive-text">Superior (Optimal)</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Parallelization</td>
+                  <td class="negative-text">No (Sequential states)</td>
+                  <td class="negative-text">No (Sequential states)</td>
+                  <td class="positive-text">Yes (Full parallel)</td>
+                  <td class="highlight-col-cell positive-text">Yes (Full parallel)</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Computational Complexity</td>
+                  <td>Low (O(N))</td>
+                  <td>Medium (O(N<sup>2</sup>))</td>
+                  <td>High (O(N<sup>2</sup>))</td>
+                  <td class="highlight-col-cell">High (O(N<sup>2</sup>))</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Inference Translation Quality</td>
+                  <td>Low</td>
+                  <td>Medium-High</td>
+                  <td>High</td>
+                  <td class="highlight-col-cell positive-text font-bold">Best (SOTA)</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Model Interpretability</td>
+                  <td class="negative-text">None</td>
+                  <td class="positive-text">High (Alignment Maps)</td>
+                  <td class="warning-text">Moderate (Multi-head complexity)</td>
+                  <td class="highlight-col-cell warning-text">Moderate (Multi-head complexity)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: TRAINING INSIGHTS -->
+      <section class="slide" id="slide-13" data-slide-index="13">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">13.</span> Training &amp; Architectural Insights</h2>
+          
+          <div class="grid-3-cols">
+            <div class="infographic-card card glass-card border-glow-purple">
+              <span class="info-num">01</span>
+              <h3>Teacher Forcing Decay</h3>
+              <p>Decaying teacher forcing ratios progressively improves test-time decoding robustness and reduces the impact of exposure bias.</p>
+            </div>
+            
+            <div class="infographic-card card glass-card">
+              <span class="info-num">02</span>
+              <h3>Subword BPE Strategy</h3>
+              <p>BPE subword mapping completely resolves OOV errors while keeping embeddings dense and computation highly efficient.</p>
+            </div>
+
+            <div class="infographic-card card glass-card">
+              <span class="info-num">03</span>
+              <h3>Attention Flatness</h3>
+              <p>In LSTMs, attention becomes flat over sequences longer than 40 tokens. Self-attention layers preserve local and global contexts much better.</p>
+            </div>
+          </div>
+
+          <div class="grid-2-cols" style="margin-top: 20px;">
+            <div class="info-detail-box glass-card card">
+              <div class="flex-row">
+                <span class="large-icon text-purple">⚡</span>
+                <div>
+                  <h4>Mixed Precision (AMP) Performance Boost</h4>
+                  <p>Implementing <strong>Automatic Mixed Precision (FP16/FP32)</strong> reduces overall GPU training times by <strong>30–40%</strong> without degrading convergence limits or BLEU evaluations.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="info-detail-box glass-card card">
+              <div class="flex-row">
+                <span class="large-icon text-blue">⚙️</span>
+                <div>
+                  <h4>Gradient Clipping Stability</h4>
+                  <p>Applying gradient norm clipping at a threshold of <strong>1.0</strong> prevents gradient explosions in deep recurrent networks, stabilizing early training iterations.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: TECHNICAL IMPLEMENTATION -->
+      <section class="slide" id="slide-14" data-slide-index="14">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">14.</span> Technical Implementation Details</h2>
+          
+          <div class="code-presentation-grid">
+            <div class="code-meta-card glass-card">
+              <h3>System Stack</h3>
+              <div class="tech-stack-list">
+                <div class="tech-stack-item">
+                  <span class="tech-label">Framework</span>
+                  <span class="tech-value">PyTorch 2.0+</span>
+                </div>
+                <div class="tech-stack-item">
+                  <span class="tech-label">Hardware</span>
+                  <span class="tech-value">Kaggle T4 GPU</span>
+                </div>
+                <div class="tech-stack-item">
+                  <span class="tech-label">Pipelines</span>
+                  <span class="tech-value">DataLoader &amp; Custom Collate</span>
+                </div>
+                <div class="tech-stack-item">
+                  <span class="tech-label">Decoding</span>
+                  <span class="tech-value">Greedy with Length Penalty</span>
+                </div>
+              </div>
+              <p class="small-desc" style="margin-top: 15px;">We save checkpoint states for loss valleys during cross-validation validation steps.</p>
+            </div>
+
+            <div class="code-snippet-card card glass-card">
+              <div class="code-header">
+                <div class="code-tabs">
+                  <button class="code-tab active" data-code="model">Model Definition</button>
+                  <button class="code-tab" data-code="training">Training Loop</button>
+                  <button class="code-tab" data-code="inference">Greedy Decoding</button>
+                </div>
+                <div class="window-controls">
+                  <span class="win-dot dot-red"></span>
+                  <span class="win-dot dot-yellow"></span>
+                  <span class="win-dot dot-green"></span>
+                </div>
+              </div>
+              
+              <div class="code-body-wrapper">
+                <!-- CODE SNIPPET 1: MODEL -->
+                <pre class="code-content active" id="code-model"><code><span class="code-kw">class</span> <span class="code-class">TransformerSeq2Seq</span>(nn.Module):
+    <span class="code-kw">def</span> <span class="code-func">__init__</span>(self, src_vocab, tgt_vocab, d_model=512, nhead=8):
+        super().__init__()
+        self.encoder = nn.TransformerEncoder(
+            nn.TransformerEncoderLayer(d_model, nhead), num_layers=6
+        )
+        self.decoder = nn.TransformerDecoder(
+            nn.TransformerDecoderLayer(d_model, nhead), num_layers=6
+        )
+        self.src_emb = nn.Embedding(src_vocab, d_model)
+        self.tgt_emb = nn.Embedding(tgt_vocab, d_model)
+        self.pos_encoder = PositionalEncoding(d_model)
+        self.fc_out = nn.Linear(d_model, tgt_vocab)
+
+    <span class="code-kw">def</span> <span class="code-func">forward</span>(self, src, tgt, src_mask, tgt_mask):
+        src_emb = self.pos_encoder(self.src_emb(src))
+        tgt_emb = self.pos_encoder(self.tgt_emb(tgt))
+        memory = self.encoder(src_emb, src_mask)
+        out = self.decoder(tgt_emb, memory, tgt_mask)
+        <span class="code-kw">return</span> self.fc_out(out)</code></pre>
+
+                <!-- CODE SNIPPET 2: TRAINING -->
+                <pre class="code-content" id="code-training"><code><span class="code-comment"># Automated Mixed Precision Training Loop</span>
+scaler = torch.cuda.amp.GradScaler()
+
+<span class="code-kw">for</span> epoch <span class="code-kw">in</span> range(num_epochs):
+    model.train()
+    <span class="code-kw">for</span> batch <span class="code-kw">in</span> dataloader:
+        optimizer.zero_grad()
+        
+        <span class="code-kw">with</span> torch.cuda.amp.autocast():
+            output = model(batch.src, batch.tgt_input)
+            loss = criterion(output.view(-1, vocab_size), batch.tgt_y)
+            
+        scaler.scale(loss).backward()
+        scaler.unscale_(optimizer)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+        scaler.step(optimizer)
+        scaler.update()</code></pre>
+
+                <!-- CODE SNIPPET 3: INFERENCE -->
+                <pre class="code-content" id="code-inference"><code><span class="code-kw">def</span> <span class="code-func">greedy_decode</span>(model, src_sentence, max_len=50):
+    model.eval()
+    src_tokens = tokenize(src_sentence)
+    encoder_memory = model.encoder(src_tokens)
+    
+    outputs = [SOS_TOKEN]
+    <span class="code-kw">for</span> _ <span class="code-kw">in</span> range(max_len):
+        tgt_tensor = torch.LongTensor(outputs).unsqueeze(1)
+        out = model.decoder(tgt_tensor, encoder_memory)
+        prob = model.fc_out(out[-1])
+        next_token = prob.argmax(dim=-1).item()
+        
+        outputs.append(next_token)
+        <span class="code-kw">if</span> next_token == EOS_TOKEN:
+            <span class="code-kw">break</span>
+    <span class="code-kw">return</span> detokenize(outputs)</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: CONCLUSION -->
+      <section class="slide" id="slide-15" data-slide-index="15">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">15.</span> Research Conclusion</h2>
+          
+          <div class="conclusion-grid">
+            <div class="card glass-card">
+              <h3>Key Findings</h3>
+              <ul class="accent-bullets">
+                <li><strong>Recurrence Shift:</strong> Progression from LSTMs through Bahdanau attention to Transformers maps a steady rise in semantic translation accuracy.</li>
+                <li><strong>Transformer Scalability:</strong> Transformer models capture context much faster and generalize better due to non-sequential layers.</li>
+                <li><strong>Robust Preprocessing:</strong> BPE subword strategies are critical to solving vocabulary explosions in multilingual translation models.</li>
+              </ul>
+            </div>
+            
+            <div class="card glass-card highlight-quote-card border-glow-purple">
+              <div class="quote-icon">“</div>
+              <blockquote>
+                Recurrence is not necessary for sequence modeling. Self-attention mechanisms provide better contextual alignments and full training parallelization.
+              </blockquote>
+              <div class="quote-author">— Core Study Takeaway</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: FUTURE WORK -->
+      <section class="slide" id="slide-16" data-slide-index="16">
+        <div class="slide-content standard-layout">
+          <h2 class="slide-heading"><span class="number-accent">16.</span> Future Work &amp; Extensions</h2>
+          <p class="slide-description">Planned enhancements to scale translational capacity and improve generalization metrics.</p>
+          
+          <div class="roadmap-grid">
+            <div class="roadmap-card glass-card">
+              <div class="roadmap-header">
+                <span class="roadmap-num">01</span>
+                <h4>Decoding &amp; Metrics</h4>
+              </div>
+              <ul class="accent-bullets">
+                <li><strong>Beam Search:</strong> Replace greedy search with beam exploration to find optimal token pathways.</li>
+                <li><strong>BLEU Validation:</strong> Add BLEU score evaluation metrics to measure exact translation overlap.</li>
+              </ul>
+            </div>
+
+            <div class="roadmap-card glass-card">
+              <div class="roadmap-header">
+                <span class="roadmap-num">02</span>
+                <h4>Architecture Adjustments</h4>
+              </div>
+              <ul class="accent-bullets">
+                <li><strong>Sinusoidal Encodings:</strong> Test rigid sinusoidal positional encodings relative to learned embeddings.</li>
+                <li><strong>Label Smoothing:</strong> Introduce label smoothing during optimization to avoid over-confident predictions.</li>
+              </ul>
+            </div>
+
+            <div class="roadmap-card glass-card border-glow-purple">
+              <div class="roadmap-header">
+                <span class="roadmap-num">03</span>
+                <h4>Scaling Model Scope</h4>
+              </div>
+              <ul class="accent-bullets">
+                <li><strong>Pretrained Transfer:</strong> Fine-tune multilingual checkpoints like <strong>mBART</strong> or <strong>T5</strong>.</li>
+                <li><strong>Hyperparameter Tuning:</strong> Run dropout rate sweeps and add layer normalization layers.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Future Roadmap SVG -->
+          <div class="roadmap-svg-container card glass-card">
+            <h3>Future Development Timeline</h3>
+            <svg width="100%" height="80" viewBox="0 0 600 80" class="svg-diagram">
+              <line x1="50" y1="40" x2="550" y2="40" stroke="#1A2235" stroke-width="4" />
+              <line x1="50" y1="40" x2="250" y2="40" stroke="#7B61FF" stroke-width="4" />
+              
+              <!-- Point 1 -->
+              <circle cx="50" cy="40" r="8" fill="#7B61FF" stroke="#A855F7" stroke-width="2" />
+              <text x="50" y="20" fill="#E5E7EB" font-size="9" text-anchor="middle" font-weight="bold">Phase 1: Metrics</text>
+              <text x="50" y="62" fill="#9CA3AF" font-size="8" text-anchor="middle">Beam Search &amp; BLEU</text>
+
+              <!-- Point 2 -->
+              <circle cx="250" cy="40" r="8" fill="#7B61FF" stroke="#A855F7" stroke-width="2" />
+              <text x="250" y="20" fill="#E5E7EB" font-size="9" text-anchor="middle" font-weight="bold">Phase 2: Tuning</text>
+              <text x="250" y="62" fill="#9CA3AF" font-size="8" text-anchor="middle">Label Smoothing &amp; Dropout</text>
+
+              <!-- Point 3 -->
+              <circle cx="450" cy="40" r="8" fill="#121826" stroke="#3B82F6" stroke-width="2" />
+              <text x="450" y="20" fill="#E5E7EB" font-size="9" text-anchor="middle" font-weight="bold">Phase 3: Scaling</text>
+              <text x="450" y="62" fill="#9CA3AF" font-size="8" text-anchor="middle">Pretrained Transfer (T5)</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: FINAL THANK YOU SLIDE -->
+      <section class="slide" id="slide-17" data-slide-index="17">
+        <div class="slide-content thank-you-layout">
+          <div class="glow-container">
+            <h1 class="thank-you-title gradient-text">Thank You</h1>
+            <p class="thank-you-subtitle">Questions &amp; Discussion</p>
+          </div>
+          
+          <div class="thank-you-card glass-card">
+            <h3>English to French Neural Machine Translation</h3>
+            <p class="project-summary-text">A Comparative Study of Deep Learning Architectures</p>
+            
+            <div class="footer-team-list">
+              <span>Achouri Islem Youcef</span>
+              <span class="sep">•</span>
+              <span>Mohammed Ousaid Ahlem</span>
+              <span class="sep">•</span>
+              <span>Merzouk Nabahat</span>
+              <span class="sep">•</span>
+              <span>Yettou Abdellah</span>
+            </div>
+            
+            <p class="academic-year-text">Academic Year 2025–2026</p>
+          </div>
+
+          <button id="restart-presentation-btn" class="action-btn primary-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px; vertical-align:middle;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            Restart Presentation
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Presentation Footer Progress -->
+    <footer class="presentation-footer">
+      <div class="footer-left">
+        <span class="deck-title">English to French NMT architectures comparison study</span>
+      </div>
+      <div class="footer-center">
+        <!-- Dots Navigation -->
+        <div class="dots-navigation" id="dots-container"></div>
+      </div>
+      <div class="footer-right">
+        <span class="keyboard-hint">Use arrow keys or click slide indicators to navigate</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive Slide Drawer / Menu -->
+  <div class="slide-menu-overlay" id="menu-overlay"></div>
+  <aside class="slide-menu" id="slide-menu">
+    <div class="menu-header">
+      <h3>Select Slide</h3>
+      <button id="menu-close-btn" class="nav-icon-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+      </button>
+    </div>
+    <ul class="menu-list" id="menu-list-items">
+      <!-- Generated by JavaScript -->
+    </ul>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
