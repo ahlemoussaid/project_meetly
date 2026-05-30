@@ -1,0 +1,17 @@
+# PyTorch (CPU-compatible)
+torch
+torchaudio
+
+# Hugging Face libraries for Custom Whisper LoRA loading
+transformers
+peft
+huggingface_hub
+
+# PyAnnote speaker diarization
+pyannote.audio
+
+# Audio processing and formats
+librosa
+soundfile
+pydub
+numpy

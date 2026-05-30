@@ -61,37 +61,26 @@ export function Record() {
         }
 
         try {
+          const meetingTitle = `Meeting - ${new Date().toLocaleDateString(undefined, {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })}`;
+
           const formData = new FormData();
           formData.append('audio', audioBlob, `recording-${Date.now()}.webm`);
+          formData.append('title', meetingTitle);
+          formData.append('duration', formatTime(time));
 
-          // 1. Upload audio
-          const uploadRes = await apiFetch('/upload', {
+          const processRes = await apiFetch('/meetings/process-meeting', {
             method: 'POST',
             body: formData,
           });
 
-          if (uploadRes.success) {
-            // 2. Create meeting metadata
-            const meetingTitle = `Meeting - ${new Date().toLocaleDateString(undefined, {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}`;
-
-            const meetingRes = await apiFetch('/meetings', {
-              method: 'POST',
-              body: JSON.stringify({
-                title: meetingTitle,
-                duration: formatTime(time),
-                audioFileUrl: uploadRes.data.fileUrl,
-              }),
-            });
-
-            if (meetingRes.success) {
-              navigate(`/summary/${meetingRes.data._id}`);
-            }
+          if (processRes.success) {
+            navigate(`/summary/${processRes.data._id}`);
           }
         } catch (err) {
           setError(err.message || 'Error processing and saving recording.');

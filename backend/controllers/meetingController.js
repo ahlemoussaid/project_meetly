@@ -1,4 +1,5 @@
 const Meeting = require('../models/Meeting');
+const { startMeetingProcessing } = require('../services/pipelineService');
 
 const createMeeting = async (req, res, next) => {
   try {
@@ -93,10 +94,51 @@ const updateMeetingSummary = async (req, res, next) => {
   }
 };
 
+const processMeeting = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      res.status(400);
+      throw new Error('Please upload an audio file');
+    }
+
+    const title = req.body.title || `Meeting - ${new Date().toLocaleDateString(undefined, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })}`;
+
+    const duration = req.body.duration || '00:00';
+    const audioFileUrl = `/uploads/${req.file.filename}`;
+
+    const meeting = await Meeting.create({
+      title,
+      duration,
+      audioFileUrl,
+      userId: req.user._id,
+      status: 'pending'
+    });
+
+    // Start background processing - DO NOT await so it runs asynchronously!
+    startMeetingProcessing(meeting._id, req.file.path).catch(err => {
+      console.error('Error starting meeting processing:', err);
+    });
+
+    res.status(201).json({
+      success: true,
+      data: meeting
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createMeeting,
   getMeetings,
   getMeetingById,
   deleteMeeting,
-  updateMeetingSummary
+  updateMeetingSummary,
+  processMeeting
 };

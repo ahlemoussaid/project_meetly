@@ -17,12 +17,21 @@ const meetingSchema = new mongoose.Schema({
     type: String,
   },
   transcript: {
-    type: String,
+    type: mongoose.Schema.Types.Mixed,
     default: "Transcript processing placeholder...",
   },
   summary: {
     type: String,
     default: "AI Summary processing placeholder...",
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'diarization', 'transcribing', 'summarizing', 'completed', 'failed'],
+    default: 'pending',
+  },
+  error: {
+    type: String,
+    default: null,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { Download, Share2, Play, Pause, FileText, List, Loader2 } from 'lucide-react';
+import { Download, Share2, Play, Pause, FileText, List, Loader2, AlertCircle } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../utils/api';
 
@@ -16,19 +16,43 @@ export function Summary() {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    async function fetchMeetingDetails() {
+    let intervalId = null;
+
+    async function fetchMeetingDetails(showLoader = true) {
+      if (showLoader) setLoading(true);
       try {
         const res = await apiFetch(`/meetings/${id}`);
         if (res.success) {
           setMeeting(res.data);
+          
+          const currentStatus = res.data.status;
+          if (currentStatus !== 'completed' && currentStatus !== 'failed' && currentStatus !== undefined) {
+            if (!intervalId) {
+              intervalId = setInterval(() => {
+                fetchMeetingDetails(false);
+              }, 2000);
+            }
+          } else {
+            if (intervalId) {
+              clearInterval(intervalId);
+              intervalId = null;
+            }
+          }
         }
       } catch (err) {
         setError(err.message || 'Failed to load meeting details');
       } finally {
-        setLoading(false);
+        if (showLoader) setLoading(false);
       }
     }
-    fetchMeetingDetails();
+
+    fetchMeetingDetails(true);
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, [id]);
 
   const togglePlay = () => {
@@ -98,6 +122,61 @@ export function Summary() {
         <div className="mt-4">
           <Button onClick={() => navigate('/')}>Back to Dashboard</Button>
         </div>
+      </div>
+    );
+  }
+
+  if (meeting.status === 'failed') {
+    return (
+      <div className="p-6 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 max-w-xl mx-auto mt-10 space-y-4">
+        <div className="flex items-center gap-2">
+          <AlertCircle className="w-6 h-6 shrink-0" />
+          <h2 className="text-lg font-bold text-white">Processing Failed</h2>
+        </div>
+        <p className="text-sm text-white/70">
+          The AI pipeline encountered an error while processing your meeting:
+        </p>
+        <div className="p-3 bg-black/30 rounded border border-white/5 font-mono text-xs overflow-x-auto text-red-300">
+          {meeting.error || 'Unknown error'}
+        </div>
+        <div className="pt-2 flex gap-3">
+          <Button onClick={() => navigate('/')}>Back to Dashboard</Button>
+          <Button variant="secondary" onClick={() => window.location.reload()}>Retry Check</Button>
+        </div>
+      </div>
+    );
+  }
+
+  const isProcessing = meeting.status !== 'completed' && meeting.status !== undefined;
+
+  if (isProcessing) {
+    const getStatusMessage = (status) => {
+      switch (status) {
+        case 'pending': return 'File uploaded. Starting processing...';
+        case 'diarization': return 'Detecting speakers... (Running PyAnnote Diarization)';
+        case 'transcribing': return 'Transcribing audio... (Running custom Darija Whisper model)';
+        case 'summarizing': return 'Generating summary... (Running Qwen LLM)';
+        default: return 'Processing meeting...';
+      }
+    };
+
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6">
+        <Card className="p-8 max-w-md w-full border-[#00E0FF]/30 bg-gradient-to-b from-[#00E0FF]/5 to-transparent flex flex-col items-center space-y-6">
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full border-4 border-[#00E0FF] animate-[ping_1.5s_cubic-bezier(0,0,0.2,1)_infinite] opacity-30"></div>
+            <div className="w-20 h-20 rounded-full bg-[#00E0FF]/15 flex items-center justify-center border border-[#00E0FF]/30 relative z-10">
+              <Loader2 className="w-10 h-10 text-[#00E0FF] animate-spin" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h2 className="text-xl font-bold text-white">AI Pipeline Active</h2>
+            <p className="text-[#00E0FF] font-medium text-sm animate-pulse">{getStatusMessage(meeting.status)}</p>
+          </div>
+          <p className="text-white/40 text-xs px-4">
+            This might take a few minutes as we run speaker diarization, transcribe segments using your custom model, and summarize dialogue.
+          </p>
+        </Card>
       </div>
     );
   }
@@ -179,10 +258,29 @@ export function Summary() {
               <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FileText className="text-[#00E0FF] w-5 h-5" /> Full Transcript
               </h2>
-              <div className="max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10">
-                <p className="text-white/80 leading-relaxed whitespace-pre-wrap">
-                  {meeting.transcript}
-                </p>
+              <div className="max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 space-y-4">
+                {Array.isArray(meeting.transcript) ? (
+                  <div className="space-y-4">
+                    {meeting.transcript.map((seg, idx) => (
+                      <div 
+                        key={idx} 
+                        className="flex flex-col space-y-1.5 p-3 rounded-lg bg-white/5 border border-white/10 hover:border-white/15 transition-all"
+                      >
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-bold text-[#00E0FF]">{seg.speaker}</span>
+                          <span className="text-white/40 bg-white/5 px-2 py-0.5 rounded text-[10px] tracking-wider font-mono">
+                            {seg.start} &rarr; {seg.end}
+                          </span>
+                        </div>
+                        <p className="text-white/85 text-sm leading-relaxed whitespace-pre-wrap">{seg.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-white/80 leading-relaxed whitespace-pre-wrap text-sm">
+                    {meeting.transcript}
+                  </p>
+                )}
               </div>
             </Card>
           )}
