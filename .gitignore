@@ -9,6 +9,7 @@ node_modules/
 
 # ===== Environment files =====
 .env
+backend/.env
 
 # ===== Uploads / media =====
 backend/uploads/
@@ -20,3 +21,6 @@ uploads/
 
 # ===== IDE =====
 .vscode/
+
+
+project_meetly_clean/
