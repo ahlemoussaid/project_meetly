@@ -6,7 +6,7 @@ Darija.**
 Meetly brings together automatic speech recognition, speaker diarization, and
 large-language-model summarization in a full-stack application. It was
 developed as a team project at ESI-SBA and is documented in the accompanying
-[project report](rapport_meetly.pdf) (French).
+[project report](docs/reports/rapport_meetly.pdf) (French).
 
 ## Project at a glance
 
@@ -46,7 +46,8 @@ speaker.
 
 ## Model and training approach
 
-The training notebook, [Ultimate-file.ipynb](Ultimate-file.ipynb), documents the
+The training notebook,
+[whisper_darja_lora.ipynb](ml/training/whisper_darja_lora.ipynb), documents the
 Whisper fine-tuning workflow. The project explores successive ASR
 configurations; the final configuration described in the report uses:
 
@@ -96,10 +97,10 @@ the report and notebook for experimental context and evaluation methodology.
 | `backend/services/pipeline.py` | Python inference: optional speaker diarization and Whisper + LoRA transcription |
 | `backend/services/pipelineService.js` | Audio normalization, inference orchestration, and summary workflow |
 | `backend/services/summarizationService.js` | OpenRouter, DashScope, and Ollama-compatible summary integrations |
-| `Ultimate-file.ipynb` | Whisper training, evaluation, and experimentation |
-| `augment_audio.py` | Offline audio augmentation utility |
-| `rapport_meetly.pdf` | Full project report (French) |
-| `index.html`, `style.css`, `app.js` | Separate browser presentation |
+| `ml/training/whisper_darja_lora.ipynb` | Whisper training, evaluation, and experimentation |
+| `ml/training/augment_audio.py` | Offline audio augmentation utility |
+| `docs/reports/rapport_meetly.pdf` | Full project report (French) |
+| `docs/presentation/` | Separate browser presentation |
 
 ## Run the application locally
 
@@ -199,9 +200,9 @@ recording to exercise the transcription and summary workflow.
 
 The training audio and dataset are not bundled with the source. Set
 `MEETLY_DATASET_DIR` to the local dataset directory before running
-`augment_audio.py` or the notebook. Install the notebook's training
-dependencies and select a compatible GPU runtime before starting a training
-run. The notebook includes the data preparation, augmentation, LoRA
+`ml/training/augment_audio.py` or the notebook. Install the notebook's
+training dependencies and select a compatible GPU runtime before starting a
+training run. The notebook includes the data preparation, augmentation, LoRA
 configuration, training, and evaluation stages.
 
 ## Team
