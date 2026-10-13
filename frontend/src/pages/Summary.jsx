@@ -3,7 +3,7 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Download, Share2, Play, Pause, FileText, List, Loader2, AlertCircle } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { apiFetch } from '../utils/api';
+import { API_ORIGIN, apiFetch } from '../utils/api';
 
 export function Summary() {
   const { id } = useParams();
@@ -182,7 +182,7 @@ export function Summary() {
   }
 
   const audioUrl = meeting.audioFileUrl 
-    ? `http://localhost:5000${meeting.audioFileUrl}`
+    ? `${API_ORIGIN}${meeting.audioFileUrl}`
     : null;
 
   return (
@@ -352,4 +352,3 @@ export function Summary() {
     </div>
   );
 }
-

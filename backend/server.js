@@ -11,7 +11,12 @@ connectDB();
 const app = express();
 
 // Middlewares
-app.use(cors({ origin: 'http://localhost:5173' }));
+const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

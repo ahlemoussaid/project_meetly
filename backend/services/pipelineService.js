@@ -16,41 +16,23 @@ if (!fs.existsSync(tempDir)) {
 const convertAudioToWav = (inputPath, outputPath) => {
   return new Promise((resolve, reject) => {
     const args = ['-y', '-i', inputPath, '-ar', '16000', '-ac', '1', '-c:a', 'pcm_s16le', outputPath];
-    
-    // Attempt with global ffmpeg cmd
-    const proc = spawn('ffmpeg', args);
+    const ffmpegPath = process.env.FFMPEG_PATH || 'ffmpeg';
+    const proc = spawn(ffmpegPath, args);
     let stderr = '';
     
     proc.stderr.on('data', (data) => {
       stderr += data.toString();
+    });
+
+    proc.on('error', (error) => {
+      reject(new Error(`Unable to start FFmpeg (${ffmpegPath}): ${error.message}`));
     });
     
     proc.on('close', (code) => {
       if (code === 0) {
         resolve();
       } else {
-        // Fallback to absolute path found in user system
-        console.warn(`ffmpeg global command failed (code ${code}). Retrying with absolute path...`);
-        const fallbackCmd = 'C:\\Users\\ThinkPad L390\\Downloads\\ffmpeg-8.1-essentials_build\\ffmpeg-8.1-essentials_build\\bin\\ffmpeg.exe';
-        
-        if (!fs.existsSync(fallbackCmd)) {
-          return reject(new Error(`FFmpeg not found. Global run failed and absolute fallback does not exist: ${stderr}`));
-        }
-        
-        const fallbackProc = spawn(fallbackCmd, args);
-        let fallbackStderr = '';
-        
-        fallbackProc.stderr.on('data', (d) => {
-          fallbackStderr += d.toString();
-        });
-        
-        fallbackProc.on('close', (c) => {
-          if (c === 0) {
-            resolve();
-          } else {
-            reject(new Error(`FFmpeg audio conversion failed: ${fallbackStderr}`));
-          }
-        });
+        reject(new Error(`FFmpeg audio conversion failed (code ${code}): ${stderr}`));
       }
     });
   });
@@ -73,14 +55,11 @@ const startMeetingProcessing = async (meetingId, uploadedFilePath) => {
     
     // 2. Spawn python pipeline script
     const pythonPath = process.env.PYTHON_PATH || 'python';
-    const modelPath = process.env.CUSTOM_MODEL_PATH;
+    const modelPath = process.env.CUSTOM_MODEL_PATH
+      || path.resolve(__dirname, '../../models/whisper-darja-lora-v2');
     const hfToken = process.env.HF_TOKEN;
     const device = process.env.DEVICE || 'cpu';
     const scriptPath = path.join(__dirname, 'pipeline.py');
-    
-    if (!modelPath) {
-      throw new Error('CUSTOM_MODEL_PATH is not configured in .env');
-    }
     
     const args = [
       scriptPath,
@@ -98,6 +77,11 @@ const startMeetingProcessing = async (meetingId, uploadedFilePath) => {
     
     let stdoutData = '';
     let stderrData = '';
+    let processError = null;
+
+    pyProcess.on('error', (error) => {
+      processError = error;
+    });
     
     pyProcess.stdout.on('data', (data) => {
       stdoutData += data.toString();
@@ -129,10 +113,13 @@ const startMeetingProcessing = async (meetingId, uploadedFilePath) => {
       }
       
       if (code !== 0) {
-        console.error(`[Pipeline] Python process failed with code ${code}. Stderr: ${stderrData}`);
+        const failureDetails = processError
+          ? `Unable to start Python (${pythonPath}): ${processError.message}`
+          : stderrData;
+        console.error(`[Pipeline] Python process failed with code ${code}. ${failureDetails}`);
         await Meeting.findByIdAndUpdate(meetingId, { 
           status: 'failed', 
-          error: `Inference pipeline failed: ${stderrData.slice(0, 300)}...` 
+          error: `Inference pipeline failed: ${failureDetails.slice(0, 300)}`
         });
         return;
       }

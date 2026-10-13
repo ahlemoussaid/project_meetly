@@ -10,6 +10,8 @@ node_modules/
 # ===== Environment files =====
 .env
 backend/.env
+frontend/.env.local
+frontend/.env.*.local
 
 # ===== Uploads / media =====
 backend/uploads/
@@ -18,9 +20,20 @@ uploads/
 *.mp3
 *.mp4
 *.webm
+backend/temp/
+data/
+datasets/
+*.parquet
 
 # ===== IDE =====
 .vscode/
+
+# ===== Model artifacts (publish weights to a model registry, not Git) =====
+whisper-darja-lora-v2/
+models/
+*.safetensors
+*.pt
+*.pth
 
 
 project_meetly_clean/

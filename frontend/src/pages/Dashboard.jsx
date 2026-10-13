@@ -3,7 +3,7 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Mic, FileText, Download, Clock, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { apiFetch } from '../utils/api';
+import { API_BASE_URL, apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 
 export function Dashboard() {
@@ -57,7 +57,7 @@ export function Dashboard() {
       setUploadError('Network error during upload.');
     });
 
-    xhr.open('POST', 'http://localhost:5000/api/meetings/process-meeting');
+    xhr.open('POST', `${API_BASE_URL}/meetings/process-meeting`);
     
     const token = localStorage.getItem('token');
     if (token) {
@@ -243,4 +243,3 @@ export function Dashboard() {
     </div>
   );
 }
-

@@ -5,6 +5,7 @@ import argparse
 import warnings
 import numpy as np
 import io
+from pathlib import Path
 
 warnings.filterwarnings("ignore")
 
@@ -17,7 +18,11 @@ def parse_args():
 
     parser.add_argument("--audio", required=True)
     parser.add_argument("--hf_token", default=None)
-    parser.add_argument("--model_path", required=True)
+    default_model_path = Path(__file__).resolve().parents[2] / "models" / "whisper-darja-lora-v2"
+    parser.add_argument(
+        "--model_path",
+        default=os.environ.get("CUSTOM_MODEL_PATH") or str(default_model_path)
+    )
     parser.add_argument("--device", default="cpu", choices=["cpu", "cuda"])
 
     return parser.parse_args()
@@ -39,6 +44,7 @@ def main():
     )
 
     from peft import PeftModel
+    from huggingface_hub import snapshot_download
 
     device = torch.device(
         "cuda"
@@ -135,32 +141,75 @@ def main():
         file=sys.stderr
     )
 
-    base_model = "openai/whisper-large-v3-turbo"
+    # The trained LoRA adapter targets whisper-large-v3 (not the turbo variant).
+    base_model = "openai/whisper-large-v3"
+    adapter_repo_id = "soumia11111/whisper-darja-lora-v2"
+    hub_token = args.hf_token or None
+    adapter_path = Path(args.model_path).expanduser().resolve()
 
-    processor = WhisperProcessor.from_pretrained(base_model)
-
-    base = WhisperForConditionalGeneration.from_pretrained(
+    processor = WhisperProcessor.from_pretrained(
         base_model,
-        torch_dtype=(
-            torch.float16
-            if device.type == "cuda"
-            else torch.float32
-        )
+        token=hub_token
     )
 
-    model = PeftModel.from_pretrained(
-        base,
-        args.model_path
-    )
+    def load_base_model():
+        return WhisperForConditionalGeneration.from_pretrained(
+            base_model,
+            torch_dtype=(
+                torch.float16
+                if device.type == "cuda"
+                else torch.float32
+            ),
+            token=hub_token
+        )
+
+    base = load_base_model()
+    adapter_load_started = False
+
+    try:
+        adapter_file = adapter_path / "adapter_model.safetensors"
+        if not adapter_file.is_file():
+            print(
+                f"INFO: Adapter not found at {adapter_path}; downloading "
+                f"{adapter_repo_id}...",
+                file=sys.stderr
+            )
+            snapshot_download(
+                repo_id=adapter_repo_id,
+                local_dir=str(adapter_path),
+                token=hub_token
+            )
+
+        if not adapter_file.is_file():
+            raise FileNotFoundError(
+                f"Downloaded repository does not contain {adapter_file.name}"
+            )
+
+        adapter_load_started = True
+        model = PeftModel.from_pretrained(
+            base,
+            str(adapter_path)
+        )
+        print("INFO: LoRA adapter loaded successfully.", file=sys.stderr)
+    except Exception as e:
+        print(
+            f"WARNING: Could not download or load LoRA adapter from "
+            f"{adapter_repo_id}: {e}. Continuing with the base Whisper model.",
+            file=sys.stderr
+        )
+        if adapter_load_started:
+            import gc
+
+            del base
+            gc.collect()
+            base = load_base_model()
+        model = base
 
     model = model.to(device)
 
     model.eval()
 
-    print(
-        "INFO: Model loaded successfully.",
-        file=sys.stderr
-    )
+    print("INFO: Inference model ready.", file=sys.stderr)
 
     # =====================================
     # 3. LOAD AUDIO
